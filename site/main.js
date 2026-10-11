@@ -124,8 +124,9 @@
       if (!g || e.pointerId !== g.id) return;
       var dx = e.clientX - g.x, dy = e.clientY - g.y;
       if (g.mode === 'wait') {
-        if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { g = null; return; }
-        if (Math.abs(dx) < 10 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+        /* Вертикальный жест не бросаем сами: если браузер повёл прокрутку, придёт pointercancel.
+           Если не повёл, палец часто начинает чуть вниз и только потом уходит вбок — ждём. */
+        if (Math.abs(dx) < 10 || Math.abs(dx) <= Math.abs(dy)) return;
         g.mode = 'drag';
         g.x = e.clientX; dx = 0;
         try { grid.setPointerCapture(e.pointerId); } catch (err) { /* не критично */ }

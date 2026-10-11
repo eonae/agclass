@@ -63,6 +63,18 @@ const ok = (c, m) => console.log((c ? 'OK   ' : 'FAIL ') + m);
     await swipe(60, 330, 400);
     ok(await at() === 'it', 'свайп вправо с английского: it');
     await swipe(60, 330, 400);
+    // палец сначала чуть уходит вниз и только потом вбок — живой жест, не прямая
+    if (cdp) {
+      const t = (type, x, y) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y }] });
+      const pts = [[298, 405], [294, 409], [290, 411], [260, 415], [230, 419], [200, 423], [170, 427], [150, 430]];
+      for (const back of [false, true]) {
+        await t('touchStart', back ? 150 : 300, 400);
+        for (const [x, y] of pts) { await t('touchMove', back ? 450 - x : x, y); await p.waitForTimeout(16); }
+        await t('touchEnd');
+        await p.waitForTimeout(700);
+        ok(await at() === (back ? 'en' : 'it'), `свайп, начатый чуть вниз: ${back ? 'en' : 'it'}`);
+      }
+    }
     // вертикальная прокрутка тачем
     const v0 = await p.evaluate(() => scrollY);
     if (cdp) {
