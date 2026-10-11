@@ -63,6 +63,7 @@
   <symbol id="i-bike" viewBox="0 0 32 32"><path d="M4 22 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M18 22 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 M9 22 L15 22 L12 14 M15 22 L21 13 L23 22 M10 12 H14 M21 13 L20 10 H23"/></symbol>
   <symbol id="i-umbrella" viewBox="0 0 32 32"><path d="M4 16 Q16 2 28 16 Z M16 16 V25 Q16 28 13 28 Q11 28 11 26 M16 4 V6"/></symbol>
   <symbol id="i-book" viewBox="0 0 32 32"><path d="M5 7 Q11 5 16 8 Q21 5 27 7 V25 Q21 23 16 26 Q11 23 5 25 Z M16 8 V26"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20"/></symbol>
   <symbol id="i-postmark" viewBox="0 0 60 40"><circle cx="20" cy="20" r="15"/><path d="M34 12 q6 -4 12 0 t12 0 M34 20 q6 -4 12 0 t12 0 M34 28 q6 -4 12 0 t12 0"/></symbol>
   <symbol id="i-cord" viewBox="0 0 100 72" preserveAspectRatio="none"><path d="M16 72 L50 0 L84 72" vector-effect="non-scaling-stroke"/></symbol>
 </svg>
@@ -126,8 +127,8 @@
     <div class="chooser">
       <p class="chooser__hint"><span class="hint--narrow">Выберите табличку — откроется курс</span><span class="hint--wide">Два направления — один подход</span></p>
       <div class="plates">
-        <button type="button" data-pick data-reveal="never" aria-controls="worlds" data-go="en" class="plate plate--en" aria-pressed="true"><span class="plate__face"><span class="plate__name">Английский переулок <b class="plate__code">AG1</b></span><span class="plate__note">для детей и взрослых</span></span></button>
-        <button type="button" data-pick data-reveal="never" aria-controls="worlds" data-go="it" class="plate plate--it" aria-pressed="false"><span class="plate__face"><span class="plate__name">Улица Информатики <b class="plate__code">AG2</b></span><span class="plate__note">ОГЭ и Python</span></span></button>
+        <button type="button" data-pick aria-controls="worlds" data-go="en" class="plate plate--en" aria-pressed="true"><span class="plate__face"><span class="plate__name">Английский переулок <b class="plate__code">AG1</b></span><span class="plate__note">для детей и взрослых</span></span></button>
+        <button type="button" data-pick aria-controls="worlds" data-go="it" class="plate plate--it" aria-pressed="false"><span class="plate__face"><span class="plate__name">Улица Информатики <b class="plate__code">AG2</b></span><span class="plate__note">ОГЭ и Python</span></span></button>
       </div>
     </div>
 
@@ -139,11 +140,11 @@
     <div class="worlds__grid">
       <div class="tabs">
         <div class="tabs__sticky">
-          <button type="button" class="tab tab--it" data-go="it" data-reveal="ifPassed" aria-controls="worlds" aria-label="информатика — перейти к курсу">
+          <button type="button" class="tab tab--it" data-go="it" aria-controls="worlds" aria-label="информатика — перейти к курсу">
             <svg class="tab__arrow" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span class="tab__label">информатика</span><span class="tab__code">AG2</span>
           </button>
-          <button type="button" class="tab tab--en" data-go="en" data-reveal="ifPassed" aria-controls="worlds" aria-label="английский — перейти к курсу">
+          <button type="button" class="tab tab--en" data-go="en" aria-controls="worlds" aria-label="английский — перейти к курсу">
             <svg class="tab__arrow" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span class="tab__label">английский</span><span class="tab__code">AG1</span>
           </button>
@@ -196,7 +197,7 @@
             <figcaption class="clock__caption">в Лондоне сейчас <span data-london>--:--</span></figcaption>
           </figure>
         </div>
-        <div class="world__next"><button type="button" class="btn btn--next" data-go="it" data-reveal="ifPassed" aria-controls="worlds">Посмотреть информатику</button></div>
+        <div class="world__next"><button type="button" class="btn btn--next" data-go="it" aria-controls="worlds">Посмотреть информатику</button></div>
       </article>
 
       <article class="world world--it" data-world="it" aria-labelledby="it-title">
@@ -248,7 +249,7 @@
             <p>Начинаем с короткого собеседования и диагностики уровня, чтобы понять, с чего стартовать.</p>
           </div>
         </div>
-        <div class="world__next"><button type="button" class="btn btn--next" data-go="en" data-reveal="ifPassed" aria-controls="worlds">Посмотреть английский</button></div>
+        <div class="world__next"><button type="button" class="btn btn--next" data-go="en" aria-controls="worlds">Посмотреть английский</button></div>
       </article>
     </div>
     <div class="signup">
@@ -315,67 +316,69 @@
     <section class="section reviews" id="reviews" aria-labelledby="reviews-title">
       <h2 class="section-title" id="reviews-title">Открытки от учеников</h2>
       <p class="reviews__lead">Отзывы об английском и информатике. Листайте влево и вправо.</p>
-      <div class="carousel" data-carousel tabindex="0" role="region" aria-label="Открытки с отзывами, листаются влево и вправо">
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art"><svg width="30" height="30"><use href="#i-cup"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+      <div class="carousel" data-carousel role="region" aria-roledescription="карусель" aria-label="Открытки с отзывами">
+        <button type="button" class="carousel__arrow" data-step="-1" aria-label="Предыдущая открытка"><svg width="24" height="24" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+        <div class="carousel__view" tabindex="0" aria-label="Открытки, листаются влево и вправо">
+          <div class="carousel__track" data-track>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art"><svg width="30" height="30"><use href="#i-cup"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«Хочу выразить вам благодарность за неравнодушие и доброжелательность. Вы помогли мне преодолеть страх и обрести уверенность в знаниях. Спасибо!»</blockquote>
+              <figcaption class="postcard__from">Полина Г., ученица</figcaption>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art postcard__art--wall"><svg width="30" height="30"><use href="#i-bike"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«Галина Сергеевна объясняет информатику так, что даже самые сложные задачи становятся логичными и понятными. Сын занимался с удовольствием и сдал ОГЭ на твёрдую пятёрку.»</blockquote>
+              <figcaption class="postcard__from">Елена, мама ученика 9 класса</figcaption>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art postcard__art--gold"><svg width="30" height="30"><use href="#i-umbrella"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«Настоящий мотиватор! Дочка перестала бояться английского, подтянула оценки и блестяще написала ВПР.»</blockquote>
+              <figcaption class="postcard__from">Марина Васильевна, мама ученицы 8 класса</figcaption>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art postcard__art--dark"><svg width="30" height="30"><use href="#i-book"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«Долго не мог заставить себя учить английский, но благодаря структурному подходу и поддержке наконец заговорил и начал использовать язык в работе.»</blockquote>
+              <figcaption class="postcard__from">Михаил, IT-специалист</figcaption>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art"><svg width="30" height="30"><use href="#i-cup"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«ОГЭ по информатике сдал на максимальный балл. Очень понравилось программирование на Python. На уроках всё чётко, по делу и с юмором.»</blockquote>
+              <figcaption class="postcard__from">Артём, выпускник 9 класса</figcaption>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art postcard__art--wall"><svg width="30" height="30"><use href="#i-bike"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«Каждое занятие — заряд позитива. Ребёнок бежит на уроки английского, оценки исправились с троек на пятёрки.»</blockquote>
+              <figcaption class="postcard__from">Светлана, мама ученика 6 класса</figcaption>
+            </figure>
+            <figure class="postcard">
+              <div class="postcard__corner" aria-hidden="true">
+                <div class="postcard__stamp"><div class="postcard__art postcard__art--gold"><svg width="30" height="30"><use href="#i-umbrella"/></svg></div></div>
+                <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
+              </div>
+              <blockquote class="postcard__text">«Уроки помогли преодолеть языковой барьер перед зарубежной командировкой. Отдельное спасибо за IT-терминологию и деловую переписку!»</blockquote>
+              <figcaption class="postcard__from">Сергей К., инженер-программист</figcaption>
+            </figure>
           </div>
-          <blockquote class="postcard__text">«Хочу выразить вам благодарность за неравнодушие и доброжелательность. Вы помогли мне преодолеть страх и обрести уверенность в знаниях. Спасибо!»</blockquote>
-          <figcaption class="postcard__from">Полина Г., ученица</figcaption>
-        </figure>
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art postcard__art--wall"><svg width="30" height="30"><use href="#i-bike"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
-          </div>
-          <blockquote class="postcard__text">«Галина Сергеевна объясняет информатику так, что даже самые сложные задачи становятся логичными и понятными. Сын занимался с удовольствием и сдал ОГЭ на твёрдую пятёрку.»</blockquote>
-          <figcaption class="postcard__from">Елена, мама ученика 9 класса</figcaption>
-        </figure>
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art postcard__art--gold"><svg width="30" height="30"><use href="#i-umbrella"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
-          </div>
-          <blockquote class="postcard__text">«Настоящий мотиватор! Дочка перестала бояться английского, подтянула оценки и блестяще написала ВПР.»</blockquote>
-          <figcaption class="postcard__from">Марина Васильевна, мама ученицы 8 класса</figcaption>
-        </figure>
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art postcard__art--dark"><svg width="30" height="30"><use href="#i-book"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
-          </div>
-          <blockquote class="postcard__text">«Долго не мог заставить себя учить английский, но благодаря структурному подходу и поддержке наконец заговорил и начал использовать язык в работе.»</blockquote>
-          <figcaption class="postcard__from">Михаил, IT-специалист</figcaption>
-        </figure>
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art"><svg width="30" height="30"><use href="#i-cup"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
-          </div>
-          <blockquote class="postcard__text">«ОГЭ по информатике сдал на максимальный балл. Очень понравилось программирование на Python. На уроках всё чётко, по делу и с юмором.»</blockquote>
-          <figcaption class="postcard__from">Артём, выпускник 9 класса</figcaption>
-        </figure>
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art postcard__art--wall"><svg width="30" height="30"><use href="#i-bike"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
-          </div>
-          <blockquote class="postcard__text">«Каждое занятие — заряд позитива. Ребёнок бежит на уроки английского, оценки исправились с троек на пятёрки.»</blockquote>
-          <figcaption class="postcard__from">Светлана, мама ученика 6 класса</figcaption>
-        </figure>
-        <figure class="postcard">
-          <div class="postcard__corner" aria-hidden="true">
-            <div class="postcard__stamp"><div class="postcard__art postcard__art--gold"><svg width="30" height="30"><use href="#i-umbrella"/></svg></div></div>
-            <svg class="postcard__postmark" width="64" height="42"><use href="#i-postmark"/></svg>
-          </div>
-          <blockquote class="postcard__text">«Уроки помогли преодолеть языковой барьер перед зарубежной командировкой. Отдельное спасибо за IT-терминологию и деловую переписку!»</blockquote>
-          <figcaption class="postcard__from">Сергей К., инженер-программист</figcaption>
-        </figure>
-      </div>
-      <div class="carousel__nav">
-        <div class="carousel__bars" data-bars><button type="button" class="bar" aria-label="Открытка 1 из 7" aria-current="true"><span></span></button><button type="button" class="bar" aria-label="Открытка 2 из 7"><span></span></button><button type="button" class="bar" aria-label="Открытка 3 из 7"><span></span></button><button type="button" class="bar" aria-label="Открытка 4 из 7"><span></span></button><button type="button" class="bar" aria-label="Открытка 5 из 7"><span></span></button><button type="button" class="bar" aria-label="Открытка 6 из 7"><span></span></button><button type="button" class="bar" aria-label="Открытка 7 из 7"><span></span></button></div>
-        <span class="carousel__count" data-count aria-live="polite">1 из 7</span>
+        </div>
+        <button type="button" class="carousel__arrow carousel__arrow--next" data-step="1" aria-label="Следующая открытка"><svg width="24" height="24" aria-hidden="true"><use href="#i-chevron"/></svg></button>
       </div>
       <a class="btn btn--pill" href="https://max.ru/u/f9LHodD0cOJiTkxjYj-pp2aF0sU6r3-El3VjExQlknqHfpd2URp1gzA77Uw" target="_blank" rel="noopener">Отправить свою открытку в MAX</a>
     </section>

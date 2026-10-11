@@ -373,24 +373,23 @@ button { background: none; border: 0; padding: 0; font: inherit; color: inherit;
   .worlds__grid.is-sliding .tabs { opacity: 0; }
   .tabs__sticky { position: sticky; top: 12px; height: 0; }
   .tab {
-    position: absolute; top: 14px; width: 30px; padding: 12px 0 26px;
+    position: absolute; top: 14px; width: 30px; padding: 12px 0;
     display: flex; flex-direction: column; align-items: center; gap: 10px;
     pointer-events: auto; touch-action: pan-y pinch-zoom;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%);
   }
   .tab--it {
-    right: 0; border-radius: 10px 0 0 0; color: var(--mint);
+    right: 0; border-radius: 10px 0 0 10px; color: var(--mint);
     background-color: var(--screen);
     background-image: linear-gradient(rgba(127, 227, 208, .1) 1px, transparent 1px), linear-gradient(90deg, rgba(127, 227, 208, .1) 1px, transparent 1px);
     background-size: 10px 10px;
     filter: drop-shadow(-4px 5px 8px rgba(10, 12, 40, .45));
   }
   .tab--en {
-    right: 0; border-radius: 10px 0 0 0; color: var(--ink);
+    right: 0; border-radius: 10px 0 0 10px; color: var(--ink);
     background: var(--paper); box-shadow: inset 2px 0 0 var(--red);
     filter: drop-shadow(-4px 5px 8px rgba(10, 12, 40, .4));
   }
-  /* обводку срезал бы clip-path закладки — рисуем фокус внутри */
+  /* закладка прижата к краю экрана, внешняя обводка ушла бы за край — рисуем фокус внутри */
   .tab:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--focus); }
   .tab__label, .tab__code { writing-mode: vertical-rl; }
   .tab--it .tab__label { font: 700 14px/1.6 var(--mono); letter-spacing: .06em; }
@@ -434,14 +433,70 @@ button { background: none; border: 0; padding: 0; font: inherit; color: inherit;
 
 /* ---------- Открытки-отзывы ---------- */
 .reviews__lead { font-size: 18px; }
+/* Без JS — обычная лента с прокруткой. С JS — стрелки по бокам, лента циклическая
+   и едет на одну открытку за нажатие или свайп (main.js). На экране одна открытка, от 760 px — две.
+   Края окна гаснут на ширину --edge: тень своих открыток уходит мягко, соседние открытки
+   стоят дальше --edge и не видны. На телефоне стрелки лежат поверх этих краёв. */
 .carousel {
-  display: flex; gap: 28px;
-  margin: 0 calc(-1 * var(--gutter)); padding: 36px var(--gutter);
+  --per: 1; --edge: 44px; --gap: 32px;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center;
+  margin: 0 calc(-1 * var(--gutter));
+}
+.carousel__view {
+  padding: 36px var(--gutter) 56px;
   overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
   scroll-padding-inline: var(--gutter); scrollbar-width: none;
 }
-.carousel::-webkit-scrollbar { display: none; }
-.carousel:focus-visible { outline-offset: -3px; }
+.carousel__view::-webkit-scrollbar { display: none; }
+.carousel__view:focus-visible { outline-offset: -3px; }
+.carousel__track { display: flex; gap: var(--gap); }
+.carousel__arrow { display: none; }
+.js .carousel { --gap: calc(var(--edge) + 16px); }
+.js .carousel__view {
+  padding: 36px var(--edge) 64px; overflow: clip; touch-action: pan-y pinch-zoom;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 calc(var(--edge) - 6px), #000 calc(100% - var(--edge) + 6px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 calc(var(--edge) - 6px), #000 calc(100% - var(--edge) + 6px), transparent);
+}
+.js .carousel__track { will-change: transform; }
+.js .carousel__track .postcard { flex-basis: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); }
+.js .carousel__arrow {
+  position: absolute; top: calc(50% + 14px); left: 4px; z-index: 1; margin-top: -20px;
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+  border-radius: 50%; background: var(--frame); color: var(--wall-night);
+  box-shadow: var(--shadow-frame), inset 0 0 0 3px var(--frame), inset 0 0 0 5px var(--wall-night);
+  transform: rotate(-6deg);
+}
+.js .carousel__arrow--next { left: auto; right: 4px; transform: rotate(6deg) scaleX(-1); }
+.carousel__arrow svg { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 760px) {
+  .carousel { --per: 2; --edge: 40px; margin: 0; }
+  .js .carousel { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .js .carousel__arrow {
+    position: static; margin: 0; width: 56px; height: 56px;
+    box-shadow: var(--shadow-frame), inset 0 0 0 4px var(--frame), inset 0 0 0 6px var(--wall-night);
+  }
+  .js .carousel__arrow--next { grid-column: 3; }
+  .js .carousel__view { grid-column: 2; grid-row: 1; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .js .carousel__arrow:hover { background: var(--pick); box-shadow: var(--shadow-frame), inset 0 0 0 4px var(--pick), inset 0 0 0 6px var(--wall-night); }
+}
+@media (prefers-reduced-motion: no-preference) { .js .carousel__arrow { transition: background-color .2s ease; } }
+.postcard { flex-basis: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); }
+.js .carousel__arrow {
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+  border-radius: 50%; background: var(--frame); color: var(--wall-night);
+  box-shadow: var(--shadow-frame), inset 0 0 0 3px var(--frame), inset 0 0 0 5px var(--wall-night);
+  transform: rotate(-6deg);
+}
+.js .carousel__arrow--next { transform: rotate(6deg) scaleX(-1); }
+.carousel__arrow svg { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 759px) { .js .carousel__arrow:first-child { margin-left: 6px; } .js .carousel__arrow--next { margin-right: 6px; } }
+@media (min-width: 760px) { .js .carousel__arrow { width: 56px; height: 56px; box-shadow: var(--shadow-frame), inset 0 0 0 4px var(--frame), inset 0 0 0 6px var(--wall-night); } }
+@media (hover: hover) and (pointer: fine) {
+  .js .carousel__arrow:hover { background: var(--pick); box-shadow: var(--shadow-frame), inset 0 0 0 4px var(--pick), inset 0 0 0 6px var(--wall-night); }
+}
+@media (prefers-reduced-motion: no-preference) { .js .carousel__arrow { transition: background-color .2s ease; } }
 .postcard {
   flex: 0 0 min(84%, 380px); scroll-snap-align: start;
   padding: 22px 22px 20px; background: var(--postcard); color: var(--ink);
@@ -464,13 +519,6 @@ button { background: none; border: 0; padding: 0; font: inherit; color: inherit;
 .postcard__postmark { position: absolute; left: -30px; top: 34px; fill: none; stroke: var(--ink-2); stroke-opacity: .55; stroke-width: 1.2; }
 .postcard__text { margin-bottom: 16px; font: italic 19px/1.5 var(--serif); }
 .postcard__from { clear: both; padding-top: 10px; border-top: 1px dashed #C9C4B5; font-size: 15px; font-weight: 600; color: var(--wall); }
-
-.carousel__nav { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
-.carousel__bars { display: flex; flex: 1; gap: 6px; max-width: 420px; }
-.bar { flex: 1; min-width: 0; padding: 14px 0; }
-.bar span { display: block; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .35); transition: background-color .2s ease, transform .2s ease; }
-.bar[aria-current="true"] span { background: #FFFFFF; transform: scaleY(1.6); }
-.carousel__count { white-space: nowrap; font: italic 17px/1.6 var(--serif); }
 
 /* ---------- Запись ---------- */
 .contacts .frame { --tilt: .4deg; }
