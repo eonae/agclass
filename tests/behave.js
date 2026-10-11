@@ -38,7 +38,7 @@ const ok = (c, m) => console.log((c ? 'OK   ' : 'FAIL ') + m);
     // видна ли кромка второго курса
     const leak = await p.evaluate(() => { const e = document.querySelector('.world--en'); return getComputedStyle(e).display; });
     ok(leak === 'none', 'английский скрыт полностью');
-    // свайп пальцем вправо → английский
+    // свайп по курсу ничего не переключает — только нажатие
     const cdp = engine.name() === 'chromium' ? await ctx.newCDPSession(p) : null;
     async function swipe(x0, x1, y, steps = 12) {
       if (cdp) {
@@ -53,30 +53,12 @@ const ok = (c, m) => console.log((c ? 'OK   ' : 'FAIL ') + m);
       }
       await p.waitForTimeout(700);
     }
-    const ys = await p.evaluate(() => scrollY);
     await swipe(80, 330, 400);
-    ok(await at() === 'en', `свайп вправо: en (было it), scrollY ${ys} → ${await p.evaluate(() => scrollY)}`);
-    await swipe(300, 250, 400, 25);
-    ok(await at() === 'en', 'короткий свайп не переключает');
+    ok(await at() === 'it', 'свайп вправо по курсу не переключает');
     await swipe(330, 60, 400);
-    ok(await at() === 'it', 'свайп влево: it');
-    await swipe(330, 60, 400);
-    ok(await at() === 'en', 'свайп влево ещё раз: en');
-    await swipe(60, 330, 400);
-    ok(await at() === 'it', 'свайп вправо с английского: it');
-    await swipe(60, 330, 400);
-    // палец сначала чуть уходит вниз и только потом вбок — живой жест, не прямая
-    if (cdp) {
-      const t = (type, x, y) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y }] });
-      const pts = [[298, 405], [294, 409], [290, 411], [260, 415], [230, 419], [200, 423], [170, 427], [150, 430]];
-      for (const back of [false, true]) {
-        await t('touchStart', back ? 150 : 300, 400);
-        for (const [x, y] of pts) { await t('touchMove', back ? 450 - x : x, y); await p.waitForTimeout(16); }
-        await t('touchEnd');
-        await p.waitForTimeout(700);
-        ok(await at() === (back ? 'en' : 'it'), `свайп, начатый чуть вниз: ${back ? 'en' : 'it'}`);
-      }
-    }
+    ok(await at() === 'it', 'свайп влево по курсу не переключает');
+    await p.tap('.tab--en'); await p.waitForTimeout(700);
+    ok(await at() === 'en', 'закладка: обратно en');
     // вертикальная прокрутка тачем
     const v0 = await p.evaluate(() => scrollY);
     if (cdp) {

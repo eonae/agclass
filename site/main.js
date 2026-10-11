@@ -10,12 +10,12 @@
   /* ---------- Английский / Информатика ----------
      Состояние хранится в <html data-at="en|it">. На телефоне CSS показывает
      один курс и закладку на второй; на широком экране видны оба курса.
-     Закладка всегда справа: по нажатию второй курс приезжает справа,
-     свайпом его можно вытянуть с любой стороны.
+     Закладка всегда справа: по нажатию второй курс приезжает справа. Свайпа нет — только нажатие.
      Любая кнопка с data-go (табличка, закладка, «Посмотреть …») ставит начало курса к верху экрана. */
   var panes = grid ? { en: grid.querySelector('[data-world="en"]'), it: grid.querySelector('[data-world="it"]') } : {};
   var EASE = 'cubic-bezier(.2, .8, .2, 1)';
-  var slide = null; // текущее перелистывание: { to, from, inc, out, offset, side, width }; side 1 — новый курс справа, -1 — слева
+  var MS = 420;
+  var slide = null; // текущее перелистывание: { to, inc, out, offset, width }
 
   function current() { return root.dataset.at === 'it' ? 'it' : 'en'; }
   function other(which) { return which === 'en' ? 'it' : 'en'; }
@@ -26,9 +26,9 @@
     });
   }
 
-  // Ставит курс to рядом с текущим, за краем блока. Возвращает описание перелистывания.
-  function begin(to, side) {
-    var from = other(to), inc = panes[to], out = panes[from];
+  // Ставит курс to справа от текущего, за краем блока.
+  function begin(to) {
+    var inc = panes[to], out = panes[other(to)];
     var top = grid.getBoundingClientRect().top;
     inc.classList.add('is-incoming');
     // если блок курсов уже ушёл вверх, новый курс приезжает своим началом к верху экрана
@@ -36,7 +36,7 @@
     var offset = Math.max(0, Math.min(-top, room));
     inc.style.cssText = 'position:absolute;left:0;right:0;top:' + offset + 'px;z-index:1';
     grid.classList.add('is-sliding');
-    return { to: to, from: from, inc: inc, out: out, offset: offset, side: side, width: grid.clientWidth };
+    return { to: to, inc: inc, out: out, offset: offset, width: grid.clientWidth };
   }
 
   // dx — сдвиг текущего курса в пикселях, отрицательный — влево.
@@ -45,7 +45,7 @@
     s.out.style.transition = t;
     s.inc.style.transition = t;
     s.out.style.transform = 'translate3d(' + dx + 'px,0,0)';
-    s.inc.style.transform = 'translate3d(' + (s.side * s.width + dx) + 'px,0,0)';
+    s.inc.style.transform = 'translate3d(' + (s.width + dx) + 'px,0,0)';
   }
 
   function cleanup(s) {
@@ -56,26 +56,21 @@
     slide = null;
   }
 
-  // Довести перелистывание до конца (done) или вернуть как было.
-  function settle(s, done, ms) {
-    var target = done ? -s.side * s.width : 0;
-    var finish = function () {
-      if (done) {
-        root.dataset.at = s.to;
-        mark(s.to);
-        cleanup(s);
-        // новый курс встал в поток с верха блока — сдвигаем страницу, чтобы на экране ничего не прыгнуло
-        if (s.offset) window.scrollTo({ top: window.scrollY - s.offset, behavior: 'instant' });
-      } else {
-        cleanup(s);
-      }
-    };
-    if (!ms) { finish(); return; }
-    place(s, target, ms);
+  // Довести перелистывание до конца.
+  function settle(s) {
     var ended = false;
-    var end = function () { if (ended) return; ended = true; finish(); };
+    var end = function () {
+      if (ended) return;
+      ended = true;
+      root.dataset.at = s.to;
+      mark(s.to);
+      cleanup(s);
+      // новый курс встал в поток с верха блока — сдвигаем страницу, чтобы на экране ничего не прыгнуло
+      if (s.offset) window.scrollTo({ top: window.scrollY - s.offset, behavior: 'instant' });
+    };
+    place(s, -s.width, MS);
     s.out.addEventListener('transitionend', end, { once: true });
-    setTimeout(end, ms + 80);
+    setTimeout(end, MS + 80);
   }
 
   // Прокрутить страницу так, чтобы начало блока курсов встало к верху экрана.
@@ -89,10 +84,10 @@
     if (animate) {
       // блок ниже верха экрана — едем к нему, пока курс листается; ушёл вверх — begin() сам поставит курс началом к верху
       var below = grid.getBoundingClientRect().top > 0;
-      var s = slide = begin(which, 1);
+      var s = slide = begin(which);
       place(s, 0, 0);
       grid.offsetWidth; // зафиксировать начальное положение перед переходом
-      settle(s, true, 420);
+      settle(s);
       if (below) toStart(true);
     } else {
       if (which !== current()) { root.dataset.at = which; mark(which); }
@@ -100,69 +95,17 @@
     }
     if (focusAfter) {
       var h = panes[which] && panes[which].querySelector('.world__title');
-      if (h) setTimeout(function () { h.focus({ preventScroll: true }); }, animate ? 440 : 0);
+      if (h) setTimeout(function () { h.focus({ preventScroll: true }); }, animate ? MS + 20 : 0);
     }
   }
 
-  var dragged = false; // клик после перетаскивания не считается нажатием
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-go]');
     if (!b) return;
-    if (dragged) { dragged = false; e.preventDefault(); return; }
     // фокус стоял на закладке или кнопке внутри курса — после смены курса она пропадёт
     var inside = grid && grid.contains(b);
     show(b.dataset.go, inside && e.detail === 0);
   });
-
-  /* ---------- Перелистывание пальцем ----------
-     Курс тянут за закладку или свайпом по самому курсу в любую сторону. Вертикальную прокрутку
-     ведёт браузер (touch-action: pan-y), горизонтальный жест — наш. */
-  if (grid) {
-    var g = null; // { id, x, y, t, lastX, lastT, v, mode: 'wait'|'drag' }
-    grid.addEventListener('pointerdown', function (e) {
-      if (!mobile.matches || slide || g || (e.pointerType === 'mouse' && e.button !== 0)) return;
-      dragged = false;
-      g = { id: e.pointerId, x: e.clientX, y: e.clientY, lastX: e.clientX, lastT: e.timeStamp, v: 0, mode: 'wait' };
-    });
-    grid.addEventListener('pointermove', function (e) {
-      if (!g || e.pointerId !== g.id) return;
-      var dx = e.clientX - g.x, dy = e.clientY - g.y;
-      if (g.mode === 'wait') {
-        /* Вертикальный жест не бросаем сами: если браузер повёл прокрутку, придёт pointercancel.
-           Если не повёл, палец часто начинает чуть вниз и только потом уходит вбок — ждём. */
-        if (Math.abs(dx) < 10 || Math.abs(dx) <= Math.abs(dy)) return;
-        g.mode = 'drag';
-        g.x = e.clientX; dx = 0;
-        try { grid.setPointerCapture(e.pointerId); } catch (err) { /* не критично */ }
-        slide = begin(other(current()), dx < 0 ? 1 : -1);
-      }
-      var s = slide;
-      var dt = Math.max(1, e.timeStamp - g.lastT);
-      g.v = 0.8 * ((e.clientX - g.lastX) / dt) + 0.2 * g.v;
-      g.lastX = e.clientX; g.lastT = e.timeStamp;
-      // второй курс тянется за пальцем с той стороны, куда ведут
-      if (dx) s.side = dx < 0 ? 1 : -1;
-      var shift = Math.max(-s.width, Math.min(s.width, dx));
-      place(s, shift, 0);
-      g.shift = shift;
-      e.preventDefault();
-    });
-    function release(e, cancelled) {
-      if (!g || e.pointerId !== g.id) return;
-      var was = g; g = null;
-      if (was.mode !== 'drag' || !slide) return;
-      dragged = true;
-      setTimeout(function () { dragged = false; }, 400);
-      var s = slide, shift = was.shift || 0;
-      var progress = -s.side * shift / s.width;     // 0…1 — какая доля пути пройдена
-      var fling = -s.side * was.v;                  // скорость в сторону второго курса, px/ms
-      var done = !cancelled && (progress > 0.28 || (fling > 0.35 && progress > 0.04));
-      var left = done ? 1 - progress : Math.max(0, progress);
-      settle(s, done, still.matches ? 0 : Math.round(160 + 260 * left));
-    }
-    grid.addEventListener('pointerup', function (e) { release(e, false); });
-    grid.addEventListener('pointercancel', function (e) { release(e, true); });
-  }
 
   mark(current());
   // при переходе между раскладками незаконченное перелистывание сбрасывается
