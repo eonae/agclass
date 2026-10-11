@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Базовые SEO теги -->
+  <title>AGClass — Галина Сергеевна Асланова | Курсы английского языка и информатики</title>
+  <meta name="description" content="Авторские курсы английского языка и подготовка к ОГЭ по информатике от Галины Сергеевны Аслановой. Дистанционно по всей России.">
+
+  <!-- Фавикон (Иконка сайта для вкладок и поиска Яндекса) -->
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="apple-touch-icon" href="logo.jpg">
+
+  <!-- Open Graph / SEO теги для красивого отображения ссылок в мессенджерах и соцсетях -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AGClass — Галина Сергеевна Асланова | Авторские курсы">
+  <meta property="og:description" content="Учитель! Мотиватор! Авторские курсы английского языка и комплексная подготовка к ОГЭ по Информатике. Мини-группы и индивидуально.">
+  <meta property="og:image" content="Улыбающийся преподаватель английского языка.png">
+  <meta property="og:site_name" content="AGClass">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Микроразметка Schema.org для поисковых систем -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "#teacher",
+        "name": "Галина Сергеевна Асланова",
+        "jobTitle": "Преподаватель английского языка и информатики",
+        "image": "Улыбающийся преподаватель английского языка.png",
+        "email": "gsaslanova@yandex.ru",
+        "telephone": "+79261674705",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Московский Педагогический Государственный Университет"
+        }
+      },
+      {
+        "@type": "Course",
+        "name": "Авторские курсы английского языка",
+        "description": "Курсы английского языка для детей и взрослых. Дистанционно в мини-группах и индивидуально.",
+        "provider": { "@id": "#teacher" }
+      },
+      {
+        "@type": "Course",
+        "name": "Подготовка к ОГЭ по информатике",
+        "description": "Комплексная подготовка к ОГЭ по информатике. Разбор всех тем, программирование на Python.",
+        "provider": { "@id": "#teacher" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Елена" },
+        "reviewBody": "Галина Сергеевна объясняет информатику так, что даже самые сложные задачи становятся логичными и понятными. Сын занимался с удовольствием и сдал ОГЭ на твердую пятерку.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "itemReviewed": { "@id": "#teacher" }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-cream: #FAF8F5;
+      --bg-card: #FFFFFF;
+      
+      --accent-copper: #D9653B;
+      --accent-copper-hover: #BF532B;
+      
+      --image-gold: #D4A040;
+      
+      --accent-blue: #1455B3; 
+      --accent-blue-light: #E8F0FB;
+      --dark-navy: #0F172A; 
+      
+      --text-main: #1455B3; 
+      --text-muted: #1455B3; 
+      
+      --border-color: #E2E8E4;
+      --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.06);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      
+      border-left: 2px solid var(--accent-blue);
+      border-right: 2px solid var(--accent-blue);
+      min-height: 100vh;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent-blue);
+      line-height: 1.25;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* Верхняя темная шапка */
+    .top-bar {
+      background-color: var(--dark-navy);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 12px 0;
+      text-transform: uppercase;
+    }
+
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-bar-left {
+      color: var(--image-gold); 
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar-left .dot {
+      color: var(--image-gold);
+      font-size: 1.2rem;
+      line-height: 0;
+    }
+
+    /* Навигация */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      z-index: 1100;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid #fff;
+    }
+
+    .brand-text h2 {
+      font-size: 1.35rem;
+      letter-spacing: 0.5px;
+      margin: 0;
+      color: var(--accent-blue);
+    }
+
+    .brand-text span {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent-copper);
+      font-weight: 700;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-navy);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-copper);
+    }
+
+    .btn-contact {
+      background-color: var(--accent-copper);
+      color: #fff !important;
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-weight: 600 !important;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 14px rgba(217, 101, 59, 0.35);
+    }
+
+    .btn-contact:hover {
+      background-color: var(--accent-copper-hover);
+    }
+
+    /* Бургер-иконка */
+    .burger-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    
+    .burger-btn span {
+      width: 28px;
+      height: 3px;
+      background-color: var(--dark-navy);
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* Главный экран (Hero) */
+    .hero {
+      padding: 4.5rem 0 3.5rem; 
+      text-align: center;
+    }
+    
+    .hero-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      border-radius: 30px;
+      font-weight: 600;
+    }
+
+    .badge-large {
+      font-size: 1.05rem;
+      padding: 10px 24px;
+    }
+
+    .badge-glow {
+      box-shadow: 0 0 18px rgba(20, 85, 179, 0.4);
+      border: 1px solid rgba(20, 85, 179, 0.2);
+    }
+    
+    .hero-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-photo {
+      width: 180px; 
+      height: 180px; 
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--bg-cream);
+      box-shadow: 0 0 0 4px var(--accent-blue), var(--shadow-md); 
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      max-width: 700px;
+      margin: 0;
+      text-align: left;
+    }
+
+    .hero-motto {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2rem; 
+      color: var(--accent-copper);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .glow-motivator {
+      text-shadow: 0 0 20px rgba(0, 191, 255, 0.9);
+      color: var(--accent-copper);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto; 
+    }
+
+    /* Раздел «Обо мне» */
+    .about-box {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 4rem 3.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      margin-bottom: 5.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .quote-callout {
+      font-size: 1.3rem;
+      line-height: 1.5;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #092659; 
+      font-weight: 600;
+      border-left: 4px solid var(--accent-copper);
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .formula-item {
+      background: var(--bg-cream);
+      padding: 1.2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .formula-item strong {
+      color: var(--accent-copper);
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .formula-item strong.highlight {
+      display: inline;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    /* Секция программ и курсов */
+    #courses {
+      position: relative;
+    }
+
+    .courses-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 7rem; 
+      position: relative;
+      min-height: 160px;
+    }
+    
+    .courses-brain-logo {
+      position: absolute;
+      left: 0; 
+      top: -190px; 
+      width: 440px; 
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      z-index: 10;
+      border: 5px solid #fff;
+    }
+
+    .courses-header-text {
+      margin-left: 460px; 
+      flex: 1; 
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      text-align: center;
+    }
+
+    .courses-header-text h2 {
+      font-size: 2.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .courses-subtitle {
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 5.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .program-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .program-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .glow-tag {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      z-index: 10;
+    }
+
+    .glow-blue {
+      color: var(--accent-blue);
+      text-shadow: 0 0 10px rgba(20, 85, 179, 0.4), 0 0 20px rgba(20, 85, 179, 0.2);
+    }
+
+    .glow-copper-tag {
+      color: var(--accent-copper);
+      text-shadow: 0 0 10px rgba(217, 101, 59, 0.5), 0 0 20px rgba(217, 101, 59, 0.2);
+    }
+
+    .program-header {
+      padding: 2.5rem 2.2rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center; 
+    }
+
+    .program-header h3 {
+      font-size: 2.2rem; 
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .program-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge-eng {
+      background: #FEEFEA;
+      color: var(--accent-copper);
+    }
+
+    .badge-it {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+    }
+
+    .program-body {
+      padding: 2.2rem;
+      flex-grow: 1;
+    }
+
+    .checklist {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent-copper);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .checklist.it li::before {
+      color: var(--accent-blue);
+    }
+
+    .program-footer {
+      padding: 1.5rem 2.2rem 2.2rem;
+      background: var(--bg-cream);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .btn-apply {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--accent-blue);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      margin-bottom: 0.8rem;
+    }
+
+    .btn-apply:hover {
+      background: var(--accent-copper);
+    }
+
+    .btn-messenger {
+      background: transparent;
+      color: var(--accent-blue) !important;
+      border: 2px solid var(--accent-blue);
+      margin-bottom: 0;
+    }
+
+    .btn-messenger:hover {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue) !important;
+    }
+
+    /* ЛЕНТА ОТЗЫВОВ */
+    .section-header-reviews {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header-reviews h2 {
+      font-size: 2.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .reviews-ribbon {
+      background-color: var(--dark-navy);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      display: flex;
+      gap: 1.8rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin; 
+      scrollbar-color: var(--accent-copper) var(--dark-navy);
+      margin-bottom: 2rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .reviews-ribbon::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .reviews-ribbon::-webkit-scrollbar-track {
+      background: var(--dark-navy);
+      border-radius: 10px;
+    }
+
+    .reviews-ribbon::-webkit-scrollbar-thumb {
+      background: var(--accent-copper);
+      border-radius: 10px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: none;
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      flex: 0 0 340px; 
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .review-card p {
+      color: var(--dark-navy);
+      font-weight: 500;
+    }
+
+    .review-author {
+      margin-top: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      font-size: 0.95rem;
+    }
+
+    .leave-review-container {
+      text-align: center;
+      margin-bottom: 5.5rem;
+    }
+
+    /* Контакты */
+    .contact-box {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 4rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 5.5rem;
+    }
+
+    .phone-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--accent-copper);
+      text-decoration: none;
+      display: inline-block;
+      margin: 1.2rem 0;
+    }
+
+    .contacts-sub {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    .partner-callout {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      max-width: 850px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .partner-callout p {
+      color: var(--text-main);
+      font-size: 1.15rem; 
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+
+    .ps-buttons-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-ps {
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-ps-blue {
+      background-color: var(--accent-blue);
+      color: #fff !important;
+    }
+
+    .btn-ps-blue:hover {
+      background-color: #0c3e8a;
+    }
+
+    .btn-ps-orange {
+      background-color: var(--accent-copper);
+      color: #fff !important;
+    }
+
+    .btn-ps-orange:hover {
+      background-color: var(--accent-copper-hover);
+    }
+
+    /* Модальные окна */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: #FFFFFF;
+      max-width: 680px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .review-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .review-form input, .review-form textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text-main);
+    }
+
+    .review-form input:focus, .review-form textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    /* Подвал сайта */
+    footer {
+      background: var(--dark-navy);
+      padding: 4rem 0 2rem;
+      font-size: 0.95rem;
+      color: #E2E8F0;
+    }
+    
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+
+    .footer-col-title {
+      color: var(--image-gold);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 1.2rem;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .footer-links li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #E2E8F0;
+    }
+
+    .footer-links a {
+      color: #E2E8F0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--image-gold);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #94A3B8;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 860px) {
+      .top-bar .container { flex-direction: column; gap: 8px; text-align: center; }
+      .about-layout { grid-template-columns: 1fr; }
+      .formula-grid { grid-template-columns: 1fr; }
+      
+      .burger-btn { display: flex; }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 250px;
+        height: 100vh;
+        background: var(--bg-cream);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 1050;
+      }
+      
+      .nav-links.active {
+        right: 0; 
+      }
+      
+      .burger-btn.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .burger-btn.active span:nth-child(2) { opacity: 0; }
+      .burger-btn.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+      .about-box { padding: 2.5rem 1.5rem; margin-bottom: 2rem; }
+      .review-card { flex: 0 0 280px; } 
+      
+      .courses-header { flex-direction: column; text-align: center; gap: 1rem; margin-bottom: 3rem; padding-right: 0; }
+      .courses-header-text { text-align: center; margin-left: 0; max-width: 100%; align-items: center; }
+      .courses-brain-logo { position: relative; top: 0; left: 0; width: 100%; max-width: 280px; margin: 0 auto; z-index: 1; border: none; }
+      
+      .hero-title-wrapper { flex-direction: column; text-align: center; }
+      .hero h1 { text-align: center; }
+      .footer-columns { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+      .footer-links li { padding-left: 0; }
+      .footer-links li::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Верхняя темная шапка -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        АВТОРСКИЕ КУРСЫ <span class="dot">•</span> ИНДИВИДУАЛЬНЫЙ ФОРМАТ & МИНИ-ГРУППЫ
+      </div>
+      <div>КАЧЕСТВЕННОЕ ДИСТАНЦИОННОЕ ОБРАЗОВАНИЕ</div>
+    </div>
+  </div>
+
+  <!-- Навигация -->
+  <nav>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand">
+        <img src="53971e80-b834-4a8d-a718-82e0afdec02f.jpg" alt="Логотип AGClass" class="brand-logo" onerror="this.src='https://via.placeholder.com/35?text=AG'">
+        <div class="brand-text">
+          <h2>AGClass</h2>
+          <span>Knowledge • Motivation • Success</span>
+        </div>
+      </a>
+      
+      <!-- Кнопка Бургер-меню для мобильных -->
+      <div class="burger-btn" id="burgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about">Обо мне</a>
+        <a href="#courses">Курсы</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="tel:+79261674705" class="btn-contact">+7 926 167 47 05</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Главный экран (Hero) -->
+  <header class="hero container">
+    <div class="hero-badges">
+      <span class="badge badge-large">Московский Педагогический Государственный Университет с отличием</span>
+      <span class="badge badge-large badge-glow">Опыт в педагогике с 2006 года</span>
+    </div>
+    
+    <div class="hero-title-wrapper">
+      <img src="Улыбающийся преподаватель английского языка.png" alt="Галина Сергеевна Асланова" class="hero-photo">
+      <h1>Галина Сергеевна Асланова</h1>
+    </div>
+
+    <p class="hero-motto">Учитель! <span class="glow-motivator">Мотиватор!</span> Ваш проводник к знаниям и уверенности!</p>
+    
+    <p class="hero-sub">
+      Авторские курсы английского языка для детей и взрослых и комплексная подготовка к ОГЭ по Информатике. Дистанционно по всей России.
+    </p>
+  </header>
+
+  <main class="container">
+    <!-- Раздел: О преподавателе -->
+    <section id="about" class="about-box">
+      <div class="about-layout">
+        <div>
+          <div class="quote-callout">
+            Спорт научил меня дисциплине и мотивации, английский — живому общению, а информатика — строгой логике и пониманию алгоритмов.
+          </div>
+          <p style="margin-bottom: 1rem; color: var(--text-muted);">
+            Здравствуйте! Меня зовут <strong>Галина Сергеевна Асланова</strong>. Я дипломированный педагог высшей квалификационной категории, с отличием окончила Московский Педагогический Государственный Университет и много лет преподавала в московских школах и гимназиях.
+          </p>
+          <p style="color: var(--text-muted);">
+            Мой профессиональный путь начался с преподавания физической культуры, затем я получила квалификации учителя английского языка и учителя информатики. Такой синтез предметов сформировал мой авторский подход: <strong>разложить сложное на простые составляющие, привить дисциплину и привести каждого ученика к желаемому результату.</strong>
+          </p>
+        </div>
+
+        <div class="formula-grid">
+          <div class="formula-item">
+            <strong>Мотивация и спорт</strong>
+            Умение поддерживать, видеть маленькие победы и не сдаваться перед трудностями. <strong class="highlight">Дисциплина! Тренировка! Удовольствие!</strong>
+          </div>
+          <div class="formula-item">
+            <strong>Живой английский</strong>
+            <strong class="highlight">О сложном — простым, понятным языком.</strong> Структурированное и последовательное изложение теории и активная практика.
+          </div>
+          <div class="formula-item">
+            <strong>Логика и ИКТ</strong>
+            Понимание структуры алгоритмов и уверенное владение цифровыми технологиями. <strong class="highlight">От простого к сложному — легко!</strong>
+          </div>
+          <div class="formula-item">
+            <strong>Осознанность</strong>
+            Понимание учеником <em>«почему именно так»</em> и обретение полной самостоятельности. <strong class="highlight">Ученику — уверенность, родителю — спокойствие!</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Раздел: Курсы и программы -->
+    <section id="courses">
+      <div class="courses-header">
+        <!-- Атрибут loading="lazy" для оптимизации скорости -->
+        <img src="logo.jpg" alt="Мозг" class="courses-brain-logo" loading="lazy">
+        <div class="courses-header-text">
+          <h2>Направления и программы обучения</h2>
+          <p class="courses-subtitle">Дистанционные занятия в реальном времени: мини-группы и индивидуально.</p>
+        </div>
+      </div>
+
+      <div class="programs-grid">
+        <!-- Карточка: Английский Язык -->
+        <article class="program-card">
+          <div class="glow-tag glow-blue">ENGLISH</div>
+          <div class="program-header">
+            <span class="program-badge badge-eng">Английский язык</span>
+            <h3>Авторские курсы английского языка</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.4rem; text-align: center;">
+              Для детей и взрослых • Дистанционно
+            </p>
+          </div>
+          <div class="program-body">
+            <ul class="checklist">
+              <li>Полюбить английский язык и говорить красиво</li>
+              <li>Понимать речь носителей на слух</li>
+              <li>Читать книги и смотреть фильмы в оригинале</li>
+              <li>Вести деловую переписку и переговоры</li>
+              <li>Разобрать и закрепить грамматику без стресса</li>
+              <li>Сдать контрольные, ВПР, ОГЭ и ЕГЭ на высшие баллы</li>
+              <li>Легче осваивать программирование и софт на языке оригинала</li>
+              <li>Обучение работе с AI для прогрессивного изучения английского языка</li>
+            </ul>
+          </div>
+          <div class="program-footer">
+            <a href="tel:+79261674705" class="btn-apply">Записаться по телефону</a>
+            <a href="https://max.ru/u/f9LHodD0cOJiTkxjYj-pp2aF0sU6r3-El3VjExQlknqHfpd2URp1gzA77Uw" target="_blank" class="btn-apply btn-messenger">Написать в мессенджере MAX</a>
+          </div>
+        </article>
+
+        <!-- Карточка: Информатика -->
+        <article class="program-card">
+          <div class="glow-tag glow-copper-tag">IT&AI</div>
+          <div class="program-header">
+            <span class="program-badge badge-it">Информатика и ИКТ</span>
+            <h3>Подготовка к ОГЭ по информатике</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.4rem; text-align: center;">
+              Набор в группу и индивидуально • Дистанционно
+            </p>
+          </div>
+          <div class="program-body">
+            <ul class="checklist it">
+              <li>Разбор абсолютно всех тем спецификации ОГЭ</li>
+              <li>Обучение решению задач всех уровней сложности</li>
+              <li>Регулярная практика по реальным вариантам и пробникам</li>
+              <li>Алгоритмическое мышление и программирование (Python)</li>
+              <li>Индивидуальный разбор домашних заданий и поддержка</li>
+              <li>Интерактивный формат уроков и уверенность на экзамене</li>
+              <li>Обучение работе с AI с целью внедрения AI для самообразования</li>
+            </ul>
+          </div>
+          <div class="program-footer">
+            <a href="tel:+79261674705" class="btn-apply">Записаться по телефону</a>
+            <a href="https://max.ru/u/f9LHodD0cOJiTkxjYj-pp2aF0sU6r3-El3VjExQlknqHfpd2URp1gzA77Uw" target="_blank" class="btn-apply btn-messenger">Написать в мессенджере MAX</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section id="reviews">
+      <div class="section-header-reviews">
+        <h2>Отзывы учеников и родителей</h2>
+        <p style="color: var(--text-muted); font-style: italic;">Результаты сотен выпускников за годы преподавательской деятельности</p>
+      </div>
+
+      <div class="reviews-ribbon" id="reviews-container">
+        <div class="review-card">
+          <p>«Хочу выразить Вам благодарность за неравнодушие и доброжелательность. Вы помогли мне преодолеть страх и обрести уверенность в знаниях. Спасибо!»</p>
+          <div class="review-author">Полина Г., ученица</div>
+        </div>
+        <div class="review-card">
+          <p>«Галина Сергеевна объясняет информатику так, что даже самые сложные задачи становятся логичными и понятными. Сын занимался с удовольствием и сдал ОГЭ на твердую пятерку. Отдельная благодарность за терпение!»</p>
+          <div class="review-author">Елена, мама ученика 9 класса</div>
+        </div>
+        <div class="review-card">
+          <p>«Галина Сергеевна — настоящий мотиватор! Дочка перестала бояться английского, подтянула школьную успеваемость и блестяще написала ВПР. Прекрасная подача материала!»</p>
+          <div class="review-author">Марина Васильевна, мама ученицы 8 класса</div>
+        </div>
+        <div class="review-card">
+          <p>«Замечательный преподаватель! Долго не мог заставить себя учить английский, но благодаря структурированному подходу и постоянной поддержке Галины Сергеевны, наконец-то заговорил и начал использовать язык в работе.»</p>
+          <div class="review-author">Михаил, IT-специалист</div>
+        </div>
+        <div class="review-card">
+          <p>«ОГЭ по информатике сдал на максимальный балл. Очень понравилось программирование на Python и понятные алгоритмы. На уроках всегда четко, по делу и с юмором.»</p>
+          <div class="review-author">Артем, выпускник 9 класса</div>
+        </div>
+        <div class="review-card">
+          <p>«Каждое занятие — это заряд позитива и мотивации. Ребенок бежит на уроки английского, школьные оценки исправились с троек на пятерки. Спасибо за ваш труд и умение найти подход к каждому!»</p>
+          <div class="review-author">Светлана, мама ученика 6 класса</div>
+        </div>
+        <div class="review-card">
+          <p>«Уроки помогли мне преодолеть языковой барьер перед зарубежной командировкой. Отдельное спасибо за разбор IT-терминологии и деловой переписки!»</p>
+          <div class="review-author">Сергей К., инженер-программист</div>
+        </div>
+      </div>
+      
+      <div class="leave-review-container">
+          <button onclick="toggleModal('reviewModal')" class="btn-contact">Оставить отзыв</button>
+      </div>
+    </section>
+
+    <!-- Контакты и запись -->
+    <section class="contact-box">
+      <h2>Начните обучение прямо сейчас</h2>
+      <p style="color: var(--text-muted); margin-top: 0.6rem;">Запись на предварительное собеседование и диагностику уровня знаний:</p>
+      
+      <a href="tel:+79261674705" class="phone-display">+7 926 167 47 05</a>
+      
+      <div class="contacts-sub">
+        <div>✉️ E-mail: <strong>gsaslanova@yandex.ru</strong></div>
+        <div>👤 Преподаватель: <strong>Галина Сергеевна Асланова</strong></div>
+      </div>
+
+      <div class="partner-callout">
+        <p>
+          <strong>P.S.</strong> Вокруг меня много достойных и первоклассных учителей. Если вам нужны проверенные специалисты по другим предметам, готова поделиться контактами. Это люди, которым я доверяю!
+        </p>
+        <div class="ps-buttons-wrapper">
+          <a href="tel:+79261674705" class="btn-ps btn-ps-blue">Спросить по телефону</a>
+          <a href="https://max.ru/u/f9LHodD0cOJiTkxjYj-pp2aF0sU6r3-El3VjExQlknqHfpd2URp1gzA77Uw" target="_blank" class="btn-ps btn-ps-orange">Спросить в МАХ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подвал сайта -->
+  <footer>
+    <div class="container">
+      <h2 class="footer-title">Нормативные документы • 2026-2027 учебный год</h2>
+      
+      <div class="footer-columns">
+        <!-- Левая колонка -->
+        <div>
+          <div class="footer-col-title">Английский язык:</div>
+          <ul class="footer-links">
+            <li><a href="https://disk.yandex.ru/i/OT55uvQMlMP6sg" target="_blank">Политика обработки персональных данных</a></li>
+            <li><a href="https://disk.yandex.ru/i/cVG2SyepOHVWsQ" target="_blank">Согласие на обработку персональных данных</a></li>
+            <li><a href="https://disk.yandex.ru/i/zo0RuEKChZgebQ" target="_blank">Согласие на аудио и видеозапись</a></li>
+            <li><a href="https://disk.yandex.ru/i/cVG2SyepOHVWsQ" target="_blank">Договор Оферты</a></li>
+          </ul>
+        </div>
+
+        <!-- Правая колонка -->
+        <div>
+          <div class="footer-col-title">Информатика и ИКТ:</div>
+          <ul class="footer-links">
+            <li><a href="https://disk.yandex.ru/i/9y35D4EzB-ZEgw" target="_blank">Политика обработки персональных данных</a></li>
+            <li><a href="https://disk.yandex.ru/i/W1W3o8i2kLmxYw" target="_blank">Согласие на обработку персональных данных</a></li>
+            <li><a href="https://disk.yandex.ru/i/pt6oOACyjBi4Mw" target="_blank">Согласие на аудио и видеозапись</a></li>
+            <li><a href="https://disk.yandex.ru/i/xrzhrA8fIi4jJg" target="_blank">Договор Оферты</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026–2027 AGClass. Преподаватель Галина Сергеевна Асланова. Самозанятый плательщик НПД. Все права защищены.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно: Оставить отзыв -->
+  <div class="modal" id="reviewModal">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="toggleModal('reviewModal')">&times;</button>
+      <h3>Оставить свой отзыв</h3>
+      <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Поделитесь своими впечатлениями об обучении.</p>
+      
+      <form class="review-form" onsubmit="addReview(event)">
+        <input type="text" id="reviewName" placeholder="Ваше имя" required>
+        <textarea id="reviewText" placeholder="Текст отзыва..." rows="4" required></textarea>
+        <button type="submit" class="btn-contact" style="width: 100%;">Отправить отзыв</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Скрипт для модального окна отзывов
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.toggle('active');
+    }
+
+    window.onclick = function(e) {
+      if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('active');
+      }
+    };
+
+    function addReview(event) {
+      event.preventDefault(); 
+      
+      const nameInput = document.getElementById('reviewName');
+      const textInput = document.getElementById('reviewText');
+      
+      const newCard = document.createElement('div');
+      newCard.className = 'review-card';
+      
+      const textPara = document.createElement('p');
+      textPara.textContent = '«' + textInput.value + '»';
+      
+      const authorDiv = document.createElement('div');
+      authorDiv.className = 'review-author';
+      authorDiv.textContent = nameInput.value;
+      
+      newCard.appendChild(textPara);
+      newCard.appendChild(authorDiv);
+      
+      const container = document.getElementById('reviews-container');
+      container.insertBefore(newCard, container.firstChild);
+      
+      nameInput.value = '';
+      textInput.value = '';
+      toggleModal('reviewModal');
+      
+      container.scrollTo({ left: 0, behavior: 'smooth' });
+      
+      alert('Большое спасибо! Ваш отзыв успешно добавлен.');
+    }
+
+    // Скрипт для мобильного бургер-меню
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    const menuItems = navLinks.querySelectorAll('a');
+
+    burgerBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      burgerBtn.classList.toggle('active');
+    });
+
+    // Закрываем меню при клике на любую ссылку
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        burgerBtn.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

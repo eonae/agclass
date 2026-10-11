@@ -1,0 +1,9 @@
+{
+  "name": "agclass-tests",
+  "private": true,
+  "description": "Проверка поведения сайта в Chromium и WebKit на 390 px",
+  "scripts": {
+    "test": "node behave.js http://localhost:8000/ /tmp"
+  },
+  "devDependencies": { "playwright": "1.58.0" }
+}
